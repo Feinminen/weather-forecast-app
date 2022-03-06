@@ -1,0 +1,19 @@
+.weather-card {
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  cursor: pointer;
+  text-decoration: none;
+  transition: 300ms;
+  overflow: hidden;
+
+  background-color: #1d1f26;
+  border-radius: 5px;
+}

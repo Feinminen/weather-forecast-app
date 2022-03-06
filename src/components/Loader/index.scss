@@ -1,0 +1,29 @@
+@keyframes Bounce-delay {
+  0%, 80%, 100% {
+    transform: scale(0);
+  } 40% {
+    transform: scale(1.0);
+  }
+}
+
+.loader {
+  display: inline-block;
+  padding: 0 20px;
+
+  > div {
+    width: 20px;
+    height: 20px;
+    background-color: #de5934;
+    border-radius: 100%;
+    display: inline-block;
+    animation: Bounce-delay 1.4s infinite ease-in-out both;
+  }
+
+  &__first-block {
+    animation-delay: -0.32s !important;
+  }
+
+  &__second-block {
+    animation-delay: -0.16s !important;
+  }
+}
