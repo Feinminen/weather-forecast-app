@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react'
 import block from 'bem-cn-lite'
 
 import './index.scss'
-import { UserLocation } from '../../containers/App'
+import { UserLocation } from '../../shared/types'
 import { RequestParams } from '../../hooks/useWeatherForecast'
 
 interface SearchFormProps {

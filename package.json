@@ -71,8 +71,7 @@
       "./node_modules/@dxfeed/linter/standarts/js/default.js"
     ],
     "rules": {
-      "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/no-implicit-any": "error"
+      "@typescript-eslint/no-explicit-any": "error"
     },
     "parserOptions": {
       "project": "./tsconfig.json"

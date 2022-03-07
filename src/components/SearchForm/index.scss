@@ -5,14 +5,13 @@
   align-items: center;
   justify-content: center;
 
-  width: 400px;
-  height: 150px;
+  padding: 20px;
 
   background-color: #1d1f26;
   border-radius: 5px;
 
   &__input {
-    width: 80%;
+    width: 100%;
     margin-bottom: 1rem;
     border-radius: 5px;
     border: 1px solid #5d6579;
@@ -43,7 +42,7 @@
   &__buttons {
     display: flex;
 
-    width: 80%;
+    width: 100%;
     justify-content: space-between;
   }
 

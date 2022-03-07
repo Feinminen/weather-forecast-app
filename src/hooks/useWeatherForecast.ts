@@ -23,10 +23,9 @@ const API_KEY = '1d1770ec405e1b572ad94521da7da747'
 
 const constructPath = (params: RequestParams) => {
   if (params.city !== undefined) {
-    return `${API_BASE_PATH}?q=${params.city}&appid=${API_KEY}`
-  } else {
-    return `${API_BASE_PATH}?lat=${params.coordinates.lat}&lon=${params.coordinates.lon}&appid=${API_KEY}`
+    return `${API_BASE_PATH}?q=${params.city}&units=metric&appid=${API_KEY}`
   }
+  return `${API_BASE_PATH}?lat=${params.coordinates.lat}&units=metric&lon=${params.coordinates.lon}&appid=${API_KEY}`
 }
 
 export const useWeatherForecast = () => {
@@ -36,13 +35,15 @@ export const useWeatherForecast = () => {
   const abortController = useRef<AbortController | null>(null)
 
   const makeForecastRequest = useCallback(async (params: RequestParams) => {
+    setForecast(null)
+    setIsLoading(true)
+    setIsError(false)
+
     if (abortController.current !== null) {
       abortController.current.abort()
     }
 
     abortController.current = new AbortController()
-    setIsLoading(true)
-    setIsError(false)
 
     const path = constructPath(params)
     await fetch(path, {
@@ -62,14 +63,15 @@ export const useWeatherForecast = () => {
       })
   }, [])
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       if (abortController.current) {
         abortController.current.abort()
         abortController.current = null
       }
-    }
-  }, [])
+    },
+    []
+  )
 
   return {
     forecast,

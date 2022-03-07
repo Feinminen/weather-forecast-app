@@ -1,23 +1,29 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
+import block from 'bem-cn-lite'
+
 import { Header } from '../../components/Header'
 import { SearchForm } from '../../components/SearchForm'
 import { Loader } from '../../components/Loader'
+import { WeatherCard } from '../../components/WeatherCard'
 import { RequestParams, useWeatherForecast } from '../../hooks/useWeatherForecast'
+import { UserLocation, Metric } from '../../shared/types'
+
 import './index.scss'
 
-export type UserLocation = {
-  lat: number
-  lon: number
-} | null
+const b = block('app')
 
 export function App() {
-  const { makeForecastRequest, isLoading } = useWeatherForecast()
+  const { makeForecastRequest, isLoading, forecast } = useWeatherForecast()
   const [userLocation, setUserLocation] = useState<UserLocation>(null)
+  const [metric, setMetric] = useState<Metric>('celsius')
 
-  const handleFormSubmit = useCallback((params: RequestParams) => {
-    makeForecastRequest(params)
-  }, [])
+  const handleFormSubmit = useCallback(
+    (params: RequestParams) => {
+      void makeForecastRequest(params)
+    },
+    [makeForecastRequest]
+  )
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) =>
@@ -25,26 +31,34 @@ export function App() {
     )
   }, [])
 
-  useEffect(() => {
-    if (userLocation !== null) {
-      makeForecastRequest({
-        coordinates: { lat: userLocation.lat, lon: userLocation.lon },
-      })
-    }
-  }, [userLocation])
+  const handleMetricSwitch = useCallback(() => {
+    setMetric((prev) => (prev === 'celsius' ? 'fahrenheit' : 'celsius'))
+  }, [])
 
   return (
-    <div className="app">
+    <div className={b()}>
       <Header />
-      {isLoading ? (
-        <div className="app__loader">
-          <Loader />
-        </div>
-      ) : (
-        <div className="app__form">
+      <div className={b('content', { 'is-initial': forecast === null })}>
+        <div className={b('form', { disabled: isLoading })}>
           <SearchForm onSubmit={handleFormSubmit} userLocation={userLocation} />
         </div>
-      )}
+        {isLoading && (
+          <div className={b('loader')}>
+            <Loader />
+          </div>
+        )}
+        {forecast !== null && (
+          <div className={b('weather')}>
+            <div className={b('weather-card')}>
+              <WeatherCard
+                forecast={forecast}
+                metric={metric}
+                onMetricSwitch={handleMetricSwitch}
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

@@ -1,9 +1,14 @@
+interface TemperatureProps {
+  celsius: string
+  fahrenheit: string
+}
+
 interface WeatherProps {
   time: number
-  temperature: number
-  feelsLikeTemperature: number
-  minTemperature: number
-  maxTemperature: number
+  temperature: TemperatureProps
+  feelsLikeTemperature: TemperatureProps
+  minTemperature: TemperatureProps
+  maxTemperature: TemperatureProps
   pressure: string
   humidity: string
   description: string

@@ -6,18 +6,22 @@ import { Forecast } from './types'
 export function handleResponse(response: Response) {
   if (response.ok) {
     return response.json()
-  } else {
-    throw new Error(response.statusText)
   }
+  throw new Error(response.statusText)
 }
+
+const getTemperatureProps = (celsiusTemperature: number) => ({
+  celsius: `${celsiusTemperature} C`,
+  fahrenheit: `${(celsiusTemperature * 9) / 5 + 32} F`,
+})
 
 const transformResponseToForecastData = (reqResponse: ForecastResponse): Forecast => ({
   weatherList: reqResponse.list.map((elem) => ({
     time: elem.dt,
-    temperature: elem.main.temp,
-    feelsLikeTemperature: elem.main.feels_like,
-    minTemperature: elem.main.temp_min,
-    maxTemperature: elem.main.temp_max,
+    temperature: getTemperatureProps(elem.main.temp),
+    feelsLikeTemperature: getTemperatureProps(elem.main.feels_like),
+    minTemperature: getTemperatureProps(elem.main.temp_min),
+    maxTemperature: getTemperatureProps(elem.main.temp_max),
     pressure: `${elem.main.pressure} hPa`,
     humidity: `${elem.main.humidity} %`,
     description: elem.weather[0].description,
