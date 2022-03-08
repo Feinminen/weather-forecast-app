@@ -8,9 +8,9 @@ import { SearchForm } from '../../components/SearchForm'
 import { Loader } from '../../components/Loader'
 import { WeatherCard } from '../../components/WeatherCard'
 import { ForecastCard } from '../../components/ForecastCard'
-import { useWeatherForecast } from '../../hooks/useWeatherForecast'
+import { useWeatherForecast } from './hooks/useWeatherForecast'
 import { UserLocation, Metric, RequestParams } from '../../shared/types'
-import { constructLocation } from '../../hooks/utils'
+import { constructLocation } from './hooks/utils'
 import { getForecastCardsData } from './utils'
 import './index.scss'
 
@@ -22,8 +22,9 @@ export function App({
     params: { location },
   },
 }: RouteComponentProps<{ location?: string }>) {
+  const { makeForecastRequest, setForecast, isLoading, forecast, withError, setWithError } =
+    useWeatherForecast()
   const [isPageLoading, setIsPageLoading] = useState(true)
-  const { makeForecastRequest, setForecast, isLoading, forecast } = useWeatherForecast()
   const [userLocation, setUserLocation] = useState<UserLocation>(null)
   const [metric, setMetric] = useState<Metric>('celsius')
 
@@ -36,14 +37,16 @@ export function App({
   )
 
   useEffect(() => {
-    if (location && forecast === null) {
+    if (location && forecast === null && !isLoading) {
       const savedForecast = localStorage.getItem(location)
 
-      if (savedForecast !== null) {
+      if (savedForecast !== null && savedForecast !== 'error') {
         setForecast(JSON.parse(savedForecast))
+      } else if (savedForecast === 'error') {
+        setWithError(true)
       }
     }
-  }, [location, forecast, setForecast])
+  }, [location, forecast, setForecast, makeForecastRequest, setWithError, isLoading])
 
   useEffect(() => {
     const setLoadingToTrue = () => setIsPageLoading(false)
@@ -77,7 +80,11 @@ export function App({
       <Header />
       <div className={b('content')}>
         <div className={b('form', { disabled: isLoading })}>
-          <SearchForm onSubmit={handleFormSubmit} userLocation={userLocation} />
+          <SearchForm
+            onSubmit={handleFormSubmit}
+            userLocation={userLocation}
+            withError={withError}
+          />
         </div>
         {isLoading && forecast === null && (
           <div className={b('loader')}>

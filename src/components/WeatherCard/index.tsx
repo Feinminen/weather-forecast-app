@@ -2,7 +2,7 @@ import React from 'react'
 
 import block from 'bem-cn-lite'
 
-import { Forecast } from '../../hooks/types'
+import { Forecast } from '../../shared/types'
 import { ToggleSwitch } from '../../components/ToggleSwitch'
 import { BASE_ICON_URL } from '../../shared/config'
 

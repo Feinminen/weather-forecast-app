@@ -1,15 +1,7 @@
 import * as t from 'runtypes'
 
 import { ForecastResponse } from './config'
-import { Forecast } from './types'
-import { RequestParams } from '../shared/types'
-
-export function handleResponse(response: Response) {
-  if (response.ok) {
-    return response.json()
-  }
-  throw new Error(response.statusText)
-}
+import { RequestParams, Forecast } from '../../../shared/types'
 
 const getTemperatureData = (celsiusTemperature: number) => ({
   celsius: `${celsiusTemperature} C`,
@@ -62,4 +54,6 @@ export const checkLocalStorageAvailable = () => {
 }
 
 export const constructLocation = (params: RequestParams) =>
-  params.city !== undefined ? params.city : `${params.coordinates.lat};${params.coordinates.lon}`
+  params.city !== undefined
+    ? `city=${params.city}`
+    : `lat=${params.coordinates.lat}?lon=${params.coordinates.lon}`

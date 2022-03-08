@@ -10,6 +10,10 @@
   background-color: #1d1f26;
   border-radius: 5px;
 
+  &_with-error {
+    border: 1px solid #e56157;
+  }
+
   &__input {
     width: 100%;
     margin-bottom: 1rem;
@@ -76,5 +80,11 @@
       cursor: default;
       opacity: 0.5;
     }
+  }
+
+  &__error {
+    margin-top: 20px;
+    color: #e56157;
+    padding: 2px;
   }
 }

@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { RequestParams } from '../shared/types'
-import { Forecast } from './types'
-import { prepareResponse, handleResponse, constructLocation } from './utils'
+import { RequestParams, Forecast } from '../../../shared/types'
+import { prepareResponse, constructLocation } from './utils'
 
 const API_BASE_PATH = 'https://api.openweathermap.org/data/2.5/forecast'
 const API_KEY = '1d1770ec405e1b572ad94521da7da747'
@@ -17,13 +16,13 @@ const constructPath = (params: RequestParams) => {
 export const useWeatherForecast = () => {
   const [forecast, setForecast] = useState<Forecast | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
+  const [withError, setWithError] = useState(false)
   const abortController = useRef<AbortController | null>(null)
 
   const makeForecastRequest = useCallback(async (params: RequestParams) => {
     setForecast(null)
     setIsLoading(true)
-    setIsError(false)
+    setWithError(false)
 
     if (abortController.current !== null) {
       abortController.current.abort()
@@ -35,21 +34,30 @@ export const useWeatherForecast = () => {
     await fetch(path, {
       signal: abortController.current.signal,
     })
-      .then(handleResponse)
+      .then((response) => {
+        setIsLoading(false)
+
+        if (response.ok) {
+          return response.json()
+        }
+
+        setWithError(true)
+        localStorage.setItem(constructLocation(params), 'error')
+        throw new Error(response.statusText)
+      })
       .then((res) => {
         const forecastData = prepareResponse(res)
-
-        if (!forecastData) {
-          setIsError(true)
-        }
 
         if (forecastData.forecast) {
           localStorage.setItem(constructLocation(params), JSON.stringify(forecastData.forecast))
         }
 
+        if (forecastData.withError) {
+          setWithError(true)
+        }
+
         setForecast(forecastData.forecast)
         abortController.current = null
-        setIsLoading(forecastData.withError)
       })
   }, [])
 
@@ -66,8 +74,9 @@ export const useWeatherForecast = () => {
   return {
     forecast,
     isLoading,
-    isError,
+    withError,
     makeForecastRequest,
     setForecast,
+    setWithError,
   }
 }

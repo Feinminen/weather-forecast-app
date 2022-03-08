@@ -1,5 +1,4 @@
-import { Day, ForecastCardData } from './../../shared/types'
-import { Forecast } from '../../hooks/types'
+import { Day, ForecastCardData, Forecast } from './../../shared/types'
 
 const MILLISECONDS_MULTIPLIER = 1000
 const DATA_HOURS_GAP = 3

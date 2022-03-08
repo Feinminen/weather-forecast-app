@@ -2,19 +2,21 @@ import React, { useCallback, useState } from 'react'
 
 import block from 'bem-cn-lite'
 
-import './index.scss'
 import { UserLocation, RequestParams } from '../../shared/types'
+import './index.scss'
 
 interface SearchFormProps {
   userLocation: UserLocation
+  withError: boolean
   onSubmit: (requestParams: RequestParams) => void
 }
 
 const EMPTY_INPUT_VALUE = ''
+const ERROR_TEXT = 'The entered city was not found, please try to enter another city'
 
 const b = block('search-form')
 
-export const SearchForm = ({ onSubmit, userLocation }: SearchFormProps) => {
+export const SearchForm = ({ onSubmit, userLocation, withError }: SearchFormProps) => {
   const [city, setCity] = useState(EMPTY_INPUT_VALUE)
 
   const handleFormSubmit = useCallback(
@@ -39,7 +41,7 @@ export const SearchForm = ({ onSubmit, userLocation }: SearchFormProps) => {
   }, [])
 
   return (
-    <form onSubmit={handleFormSubmit} className={b()}>
+    <form onSubmit={handleFormSubmit} className={b({ 'with-error': withError })}>
       <input
         className={b('input')}
         aria-label="city"
@@ -69,6 +71,7 @@ export const SearchForm = ({ onSubmit, userLocation }: SearchFormProps) => {
           use location
         </button>
       </div>
+      {withError && <div className={b('error')}>{ERROR_TEXT}</div>}
     </form>
   )
 }
