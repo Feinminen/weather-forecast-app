@@ -47,4 +47,5 @@ export const ForecastResponse = t.Record({
   }),
 })
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type ForecastResponse = t.Static<typeof ForecastResponse>
