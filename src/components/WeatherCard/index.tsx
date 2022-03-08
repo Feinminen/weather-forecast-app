@@ -4,6 +4,7 @@ import block from 'bem-cn-lite'
 
 import { Forecast } from '../../hooks/types'
 import { ToggleSwitch } from '../../components/ToggleSwitch'
+import { BASE_ICON_URL } from '../../shared/config'
 
 import './index.scss'
 
@@ -14,8 +15,6 @@ interface WeatherCardProps {
   metric: 'celsius' | 'fahrenheit'
   onMetricSwitch: () => void
 }
-
-const BASE_ICON_URL = 'http://openweathermap.org/img/wn/'
 
 export const WeatherCard = ({ forecast, metric, onMetricSwitch }: WeatherCardProps) => (
   <div className={b()}>

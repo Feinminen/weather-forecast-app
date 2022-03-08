@@ -10,7 +10,7 @@ export function handleResponse(response: Response) {
   throw new Error(response.statusText)
 }
 
-const getTemperatureProps = (celsiusTemperature: number) => ({
+const getTemperatureData = (celsiusTemperature: number) => ({
   celsius: `${celsiusTemperature} C`,
   fahrenheit: `${(celsiusTemperature * 9) / 5 + 32} F`,
 })
@@ -18,10 +18,10 @@ const getTemperatureProps = (celsiusTemperature: number) => ({
 const transformResponseToForecastData = (reqResponse: ForecastResponse): Forecast => ({
   weatherList: reqResponse.list.map((elem) => ({
     time: elem.dt,
-    temperature: getTemperatureProps(elem.main.temp),
-    feelsLikeTemperature: getTemperatureProps(elem.main.feels_like),
-    minTemperature: getTemperatureProps(elem.main.temp_min),
-    maxTemperature: getTemperatureProps(elem.main.temp_max),
+    temperature: getTemperatureData(elem.main.temp),
+    feelsLikeTemperature: getTemperatureData(elem.main.feels_like),
+    minTemperature: getTemperatureData(elem.main.temp_min),
+    maxTemperature: getTemperatureData(elem.main.temp_max),
     pressure: `${elem.main.pressure} hPa`,
     humidity: `${elem.main.humidity} %`,
     description: elem.weather[0].description,

@@ -28,15 +28,27 @@
     padding: 30px;
   }
 
-  &__weather-card {
-    width: 100%;
-  }
-
   &__weather {
     margin-top: 30px;
     border-radius: 5px;
     background-color: #1d1f26;
     flex-grow: 1;
     padding: 16px;
+  }
+
+  &__forecast {
+    margin-top: 20px;
+    padding: 10px;
+
+    background-color: #272a33;
+    border-radius: 5px;
+
+    &-title {
+      margin: 0 0 15px 0;
+    }
+
+    &-cards {
+      display: flex;
+    }
   }
 }

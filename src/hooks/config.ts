@@ -9,10 +9,13 @@ export const ForecastResponse = t.Record({
         // Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
         temp: t.Number,
         // This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         feels_like: t.Number,
         // Minimum temperature at the moment of calculation. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         temp_min: t.Number,
         // Maximum temperature at the moment of calculation. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         temp_max: t.Number,
         // Atmospheric pressure on the sea level by default, hPa
         pressure: t.Number,

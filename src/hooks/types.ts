@@ -1,14 +1,11 @@
-interface TemperatureProps {
-  celsius: string
-  fahrenheit: string
-}
+import { TemperatureData } from '../shared/types'
 
 interface WeatherProps {
   time: number
-  temperature: TemperatureProps
-  feelsLikeTemperature: TemperatureProps
-  minTemperature: TemperatureProps
-  maxTemperature: TemperatureProps
+  temperature: TemperatureData
+  feelsLikeTemperature: TemperatureData
+  minTemperature: TemperatureData
+  maxTemperature: TemperatureData
   pressure: string
   humidity: string
   description: string

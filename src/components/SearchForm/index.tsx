@@ -26,14 +26,14 @@ export const SearchForm = ({ onSubmit, userLocation }: SearchFormProps) => {
         setCity(EMPTY_INPUT_VALUE)
       }
     },
-    [city]
+    [city, onSubmit]
   )
 
   const handleButtonClick = useCallback(() => {
     if (userLocation !== null) {
       onSubmit({ coordinates: userLocation })
     }
-  }, [userLocation])
+  }, [userLocation, onSubmit])
 
   const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value)
