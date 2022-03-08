@@ -4,6 +4,22 @@
   height: 100%;
   align-items: center;
 
+  &__full-page-loader {
+    position: fixed;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #131419;
+  }
+
   &__form_disabled {
     pointer-events: none;
     opacity: 0.5;

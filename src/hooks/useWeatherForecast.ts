@@ -1,22 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { RequestParams } from '../shared/types'
 import { Forecast } from './types'
-import { prepareResponse, handleResponse } from './utils'
-
-interface CoordinatesRequestParams {
-  coordinates: {
-    lon: number
-    lat: number
-  }
-  city?: never
-}
-
-interface CityRequestParams {
-  city: string
-  coordinates?: never
-}
-
-export type RequestParams = CoordinatesRequestParams | CityRequestParams
+import { prepareResponse, handleResponse, constructLocation } from './utils'
 
 const API_BASE_PATH = 'https://api.openweathermap.org/data/2.5/forecast'
 const API_KEY = '1d1770ec405e1b572ad94521da7da747'
@@ -57,6 +43,10 @@ export const useWeatherForecast = () => {
           setIsError(true)
         }
 
+        if (forecastData.forecast) {
+          localStorage.setItem(constructLocation(params), JSON.stringify(forecastData.forecast))
+        }
+
         setForecast(forecastData.forecast)
         abortController.current = null
         setIsLoading(forecastData.withError)
@@ -78,5 +68,6 @@ export const useWeatherForecast = () => {
     isLoading,
     isError,
     makeForecastRequest,
+    setForecast,
   }
 }

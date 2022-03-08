@@ -2,6 +2,7 @@ import * as t from 'runtypes'
 
 import { ForecastResponse } from './config'
 import { Forecast } from './types'
+import { RequestParams } from '../shared/types'
 
 export function handleResponse(response: Response) {
   if (response.ok) {
@@ -27,7 +28,7 @@ const transformResponseToForecastData = (reqResponse: ForecastResponse): Forecas
     description: elem.weather[0].description,
     iconId: elem.weather[0].icon,
     cloudiness: `${elem.clouds.all} %`,
-    precipitationProbability: `${elem.pop * 100} %`,
+    precipitationProbability: `${Math.round(elem.pop * 100)} %`,
   })),
   city: reqResponse.city.name,
   countryCode: reqResponse.city.country,
@@ -51,3 +52,14 @@ export const prepareResponse = (response: Response) => {
 
   return { forecast, withError }
 }
+
+export const checkLocalStorageAvailable = () => {
+  try {
+    return Boolean(localStorage)
+  } catch (e) {
+    return false
+  }
+}
+
+export const constructLocation = (params: RequestParams) =>
+  params.city !== undefined ? params.city : `${params.coordinates.lat};${params.coordinates.lon}`

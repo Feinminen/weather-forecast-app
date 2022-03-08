@@ -18,3 +18,18 @@ export interface ForecastCardData {
   description: string
   temperature: TemperatureData
 }
+
+interface CoordinatesRequestParams {
+  coordinates: {
+    lon: number
+    lat: number
+  }
+  city?: never
+}
+
+interface CityRequestParams {
+  city: string
+  coordinates?: never
+}
+
+export type RequestParams = CoordinatesRequestParams | CityRequestParams
