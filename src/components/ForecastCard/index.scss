@@ -1,29 +1,54 @@
 .forecast-card {
   display: flex;
   flex-direction: column;
-
   align-items: center;
 
   padding: 10px;
 
   height: 100%;
   width: 100%;
+  min-width: 105px;
 
   text-decoration: none;
 
   background-color: transparent;
 
+  @media (max-width: 580px) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
   &__day {
     text-transform: capitalize;
     margin: 0 0 10px 0;
+
+    @media (max-width: 580px) {
+      margin: 0;
+      width: 35px;
+    }
   }
 
   &__icon {
     margin-bottom: 10px;
+
+    @media (max-width: 580px) {
+      margin: 0;
+    }
   }
 
   &__description {
     margin-bottom: 5px;
     text-align: center;
+
+    @media (max-width: 580px) {
+      display: none
+    }
+  }
+
+  &__temperature {
+    @media (max-width: 580px) {
+      width: 65px;
+    }
   }
 }

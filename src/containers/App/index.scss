@@ -25,7 +25,7 @@
     flex-grow: 1;
     align-content: center;
 
-    padding: 30px;
+    padding: 30px 10px;
   }
 
   &__weather {
@@ -49,6 +49,11 @@
 
     &-cards {
       display: flex;
+
+      @media (max-width: 580px) {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   }
 }

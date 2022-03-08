@@ -29,6 +29,6 @@ export const ForecastCard = ({
       alt="Weather icon"
     />
     <span className={b('description')}>{description}</span>
-    <span>{temperature[metric]}</span>
+    <span className={b('temperature')}>{temperature[metric]}</span>
   </div>
 )

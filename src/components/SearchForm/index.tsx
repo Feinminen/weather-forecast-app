@@ -67,7 +67,7 @@ export const SearchForm = ({ onSubmit, userLocation }: SearchFormProps) => {
           onClick={handleButtonClick}
           disabled={userLocation === null}
         >
-          use current location
+          use location
         </button>
       </div>
     </form>

@@ -12,7 +12,7 @@ export function handleResponse(response: Response) {
 
 const getTemperatureData = (celsiusTemperature: number) => ({
   celsius: `${celsiusTemperature} C`,
-  fahrenheit: `${(celsiusTemperature * 9) / 5 + 32} F`,
+  fahrenheit: `${parseFloat(((celsiusTemperature * 9) / 5 + 32).toFixed(2))} F`,
 })
 
 const transformResponseToForecastData = (reqResponse: ForecastResponse): Forecast => ({
@@ -27,7 +27,7 @@ const transformResponseToForecastData = (reqResponse: ForecastResponse): Forecas
     description: elem.weather[0].description,
     iconId: elem.weather[0].icon,
     cloudiness: `${elem.clouds.all} %`,
-    precipitationProbability: `${elem.pop} %`,
+    precipitationProbability: `${elem.pop * 100} %`,
   })),
   city: reqResponse.city.name,
   countryCode: reqResponse.city.country,

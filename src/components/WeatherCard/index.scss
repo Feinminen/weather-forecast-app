@@ -22,9 +22,18 @@
     display: flex;
     justify-content: space-between;
 
+    @media (max-width: 580px) {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
     &-side {
       display: flex;
       flex-direction: column;
+
+      @media (max-width: 580px) {
+        margin-top: 20px;
+      }
     }
   }
 
