@@ -1,10 +1,43 @@
-# Getting Started with Create React App
+# Simple weather app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Implementation of the app is available on the [STAND](https://feinminen.github.io/weather-forecast-app/)
 
-## Available Scripts
+## Project description:
 
-In the project directory, you can run:
+An application for viewing the weather forecast for 5 days. Available for any city or user's current coordinates.
+
+## Project requirements:
+
+- Application should provide 7-day (or less if there any API restrictions) forecast starting from
+today; **
+- City can be selected by name or current geo-coordinates can be used;
+- In the list temperature should be shown for a daytime, icons should be neutral;
+- In the section "Current weather" the temperature and icon depend on the current time;
+- According to changes in control "Scale's type" (C or F) convert temperature from Celsius to
+Fahrenheit or vice versa;
+- If page was reloaded then application should restore state (if any city was selected by name or
+coordinates, it should be shown saved forecast, but in background, app should ask about new
+data);
+- Make it responsive (suggest your option for mobile)
+- The result should be available in a Git repository (on Github or Bitbucket for example)
+- You can use any JavaScript framework
+- CSS frameworks shouldn't be used for this test assignment. Preferably use a CSS preprocessor
+(Stylus, Sass, etc...)
+- It should work as single page application. Although this specific task can be done in a more
+simple way, it is important that you use some package manager and other tools (like task runners
+or JS transpilers and CSS preprocessors)
+
+** Free version of [API](https://openweathermap.org/forecast5) limits the number of days when searching by city, so the forecast is only available for 5 days.
+
+## Getting Started:
+
+### Cloning repository
+
+Cloning is performed by the ```git clone``` command with a link to the remote project repository.
+
+### Install dependencies
+
+Before starting the project, dependencies that are specified in the package.json must be installed via ```yarn install ``` command.
 
 ### `yarn start`
 
@@ -14,10 +47,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
@@ -27,20 +56,12 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `yarn deploy`
 
-### `yarn eject`
+To deploy project on gh-pages
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## References:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Project is bootstraped with create-react-app;
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
