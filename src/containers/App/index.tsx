@@ -50,7 +50,11 @@ export function App({
 
   useEffect(() => {
     const setLoadingToFalse = () => setIsPageLoading(false)
-    document.addEventListener('readystatechange', setLoadingToFalse)
+    if (document.readyState === 'complete') {
+      setLoadingToFalse()
+    } else {
+      document.addEventListener('readystatechange', setLoadingToFalse)
+    }
 
     return () => document.removeEventListener('readystatechange', setLoadingToFalse)
   }, [])
