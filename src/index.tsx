@@ -1,22 +1,19 @@
 import React from 'react'
 
 import ReactDOM from 'react-dom'
-import { Redirect, Route, Switch, Router } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import { Redirect, Route, Switch, HashRouter } from 'react-router-dom'
 
 import './index.scss'
 import { App } from './containers/App'
 
-const history = createBrowserHistory()
-
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={history}>
+    <HashRouter>
       <Switch>
         <Route exact path={'/:location?'} component={App} />
         <Redirect to={'/'} />
       </Switch>
-    </Router>
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )
