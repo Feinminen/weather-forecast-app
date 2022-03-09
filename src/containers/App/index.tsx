@@ -49,10 +49,10 @@ export function App({
   }, [location, forecast, setForecast, makeForecastRequest, setWithError, isLoading])
 
   useEffect(() => {
-    const setLoadingToTrue = () => setIsPageLoading(false)
-    document.addEventListener('readystatechange', setLoadingToTrue)
+    const setLoadingToFalse = () => setIsPageLoading(false)
+    document.addEventListener('readystatechange', setLoadingToFalse)
 
-    return () => document.removeEventListener('readystatechange', setLoadingToTrue)
+    return () => document.removeEventListener('readystatechange', setLoadingToFalse)
   }, [])
 
   useEffect(() => {

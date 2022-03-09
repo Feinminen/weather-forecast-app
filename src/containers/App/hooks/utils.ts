@@ -56,4 +56,4 @@ export const checkLocalStorageAvailable = () => {
 export const constructLocation = (params: RequestParams) =>
   params.city !== undefined
     ? `city=${params.city}`
-    : `lat=${params.coordinates.lat}?lon=${params.coordinates.lon}`
+    : `lat=${params.coordinates.lat};lon=${params.coordinates.lon}`
