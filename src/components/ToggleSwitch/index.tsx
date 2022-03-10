@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import block from 'bem-cn-lite'
 
@@ -11,12 +11,12 @@ interface ToggleSwitchProps {
   children: React.ReactNode
 }
 
-export function ToggleSwitch({ children, onClick }: ToggleSwitchProps) {
-  return (
-    <div className={b()} onClick={onClick}>
-      <input type="checkbox" className={b('input')} />
-      <div className={b('background')} />
-      {children}
-    </div>
-  )
-}
+export const ToggleSwitch = memo(({ children, onClick }: ToggleSwitchProps) => (
+  <div className={b()} onClick={onClick}>
+    <input type="checkbox" className={b('input')} />
+    <div className={b('background')} />
+    {children}
+  </div>
+))
+
+ToggleSwitch.displayName = 'ToggleSwitch'

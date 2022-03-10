@@ -6,10 +6,12 @@ import './index.scss'
 
 const b = block('loader')
 
-export const Loader = () => (
-  <div className={b()}>
-    <div className={b('first-block')} />
-    <div className={b('second-block')} />
-    <div />
-  </div>
-)
+export function Loader() {
+  return (
+    <div className={b()}>
+      <div className={b('first-block')} />
+      <div className={b('second-block')} />
+      <div />
+    </div>
+  )
+}

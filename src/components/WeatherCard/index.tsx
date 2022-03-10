@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import block from 'bem-cn-lite'
 
@@ -16,7 +16,7 @@ interface WeatherCardProps {
   onMetricSwitch: () => void
 }
 
-export const WeatherCard = ({ forecast, metric, onMetricSwitch }: WeatherCardProps) => (
+export const WeatherCard = memo(({ forecast, metric, onMetricSwitch }: WeatherCardProps) => (
   <div className={b()}>
     <div className={b('header')}>
       <h3 className={b('title')}>Current weather</h3>
@@ -44,4 +44,6 @@ export const WeatherCard = ({ forecast, metric, onMetricSwitch }: WeatherCardPro
       </div>
     </div>
   </div>
-)
+))
+
+WeatherCard.displayName = 'WeatherCard'

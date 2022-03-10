@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 
 import block from 'bem-cn-lite'
 
@@ -16,14 +16,14 @@ const ERROR_TEXT = 'The entered city was not found, please try to enter another 
 
 const b = block('search-form')
 
-export const SearchForm = ({ onSubmit, userLocation, withError }: SearchFormProps) => {
+export const SearchForm = memo(({ onSubmit, userLocation, withError }: SearchFormProps) => {
   const [city, setCity] = useState(EMPTY_INPUT_VALUE)
 
   const handleFormSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       if (city !== '') {
         event.preventDefault()
-        onSubmit({ city })
+        onSubmit({ city: city.toLowerCase() })
         setCity(EMPTY_INPUT_VALUE)
       }
     },
@@ -74,4 +74,6 @@ export const SearchForm = ({ onSubmit, userLocation, withError }: SearchFormProp
       {withError && <div className={b('error')}>{ERROR_TEXT}</div>}
     </form>
   )
-}
+})
+
+SearchForm.displayName = 'SearchForm'
