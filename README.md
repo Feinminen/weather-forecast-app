@@ -2,6 +2,8 @@
 
 Implementation of the app is available on the [STAND](https://feinminen.github.io/weather-forecast-app/)
 
+Implemented according to the [BEM](https://en.bem.info/methodology/) methodology.
+
 ## Project description:
 
 An application for viewing the weather forecast for 5 days. Available for any city or user's current coordinates.
